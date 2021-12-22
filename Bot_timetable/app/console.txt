@@ -1,0 +1,61 @@
+create table subjects (name VARCHAR NOT NULL PRIMARY KEY);
+insert into subjects (name) values ('Компьютерная графика');
+insert into subjects (name) values ('Философия (пр)');
+insert into subjects (name) values ('Алгебра и геометрия');
+insert into subjects (name) values ('Высшая математика');
+insert into subjects (name) values ('Социология');
+insert into subjects (name) values ('Вычислительная техника (лаб)');
+insert into subjects (name) values ('Философия (лек)');
+insert into subjects (name) values ('Введение в ИТ (лек)');
+insert into subjects (name) values ('Введение в Ит (лаб)');
+insert into subjects (name) values ('Физкультура');
+insert into subjects (name) values ('Вычислительная техника (лек)');
+insert into subjects (name) values ('Английский язык');
+select * from subjects;
+
+create table timetable (id SERIAL NOT NULL PRIMARY KEY, week VARCHAR NOT NULL, day VARCHAR NOT NULL, subject VARCHAR NOT NULL REFERENCES subjects(name), time VARCHAR NOT NULL REFERENCES literally_timetable(time));
+insert into timetable (week, day, subject, time) values ('обе', 'Понедельник', 'Компьютерная графика', '9:30-11:05');
+insert into timetable (week, day, subject, time) values ('обе', 'Понедельник', 'Философия (пр)', '11:20-12:55');
+insert into timetable (week, day, subject, time) values ('обе', 'Вторник', 'Алгебра и геометрия', '13:10-14:45');
+insert into timetable (week, day, subject, time) values ('обе', 'Вторник', 'Высшая математика', '15:25-17:00');
+insert into timetable (week, day, subject, time) values ('нижняя', 'Вторник', 'Социология', '17:15-18:50');
+insert into timetable (week, day, subject, time) values ('верхняя', 'Вторник', 'Вычислительная техника (лаб)', '17:15-18:50');
+insert into timetable (week, day, subject, time) values ('нижняя', 'Среда', 'Социология', '9:30-11:05');
+insert into timetable (week, day, subject, time) values ('нижняя', 'Среда', 'Введение в ИТ (лек)', '11:20-12:55');
+insert into timetable (week, day, subject, time) values ('верхняя', 'Среда', 'Философия (лек)', '11:20-12:55');
+insert into timetable (week, day, subject, time) values ('обе', 'Среда', 'Введение в ИТ (лаб)', '13:10-14:45');
+insert into timetable (week, day, subject, time) values ('обе', 'Среда', 'Физкультура', '15:25-17:00');
+insert into timetable (week, day, subject, time) values ('обе', 'Среда', 'Вычислительная техника (лаб)', '17:15-18:50');
+insert into timetable (week, day, subject, time) values ('верхняя', 'Четверг', 'Вычислительная техника (лек)', '9:30-11:05');
+insert into timetable (week, day, subject, time) values ('верхняя', 'Четверг', 'Алгебра и геометрия', '11:20-12:55');
+insert into timetable (week, day, subject, time) values ('верхняя', 'Четверг', 'Высшая математика', '13:10-14:45');
+insert into timetable (week, day, subject, time) values ('верхняя', 'Четверг', 'Компьютерная графика', '15:25-17:00');
+insert into timetable (week, day, subject, time) values ('обе', 'Пятница', 'Физкультура', '9:30-11:05');
+insert into timetable (week, day, subject, time) values ('обе', 'Пятница', 'Английский язык', '11:20-12:55');
+insert into timetable (week, day, subject, time) values ('обе', 'Пятница', 'Введение в ИТ (лаб)', '13:10-14:45');
+select * from timetable;
+
+create table teachers (id SERIAL NOT NULL PRIMARY KEY, full_name VARCHAR NOT NULL, subject VARCHAR NOT NULL REFERENCES subjects(name));
+insert into teachers (full_name, subject) values ('Гудкова И.А.', 'Высшая математика');
+insert into teachers (full_name, subject) values ('Гудкова И.А.', 'Алгебра и геометрия');
+insert into teachers (full_name, subject) values ('Королева С.А.', 'Физкультура');
+insert into teachers (full_name, subject) values ('Плужникова Н.Н.', 'Философия (лек)');
+insert into teachers (full_name, subject) values ('Рогожина А.А.', 'Английский язык');
+insert into teachers (full_name, subject) values ('Попов А.П.', 'Философия (пр)');
+insert into teachers (full_name, subject) values ('Борисова О.А.', 'Компьютерная графика');
+insert into teachers (full_name, subject) values ('Черемисин А.Г.', 'Социология');
+insert into teachers (full_name, subject) values ('Павликов А.Е.', 'Введение в ИТ (лаб)');
+insert into teachers (full_name, subject) values ('Городничев М.Г.', 'Введение в ИТ (лек)');
+insert into teachers (full_name, subject) values ('Изотова А.А.', 'Вычислительная техника (лаб)');
+insert into teachers (full_name, subject) values ('Симонов С.Е.', 'Вычислительная техника (лек)');
+select * from teachers;
+
+create table literally_timetable (id SERIAL NOT NULL PRIMARY KEY, time VARCHAR NOT NULL REFERENCES timetable(time));
+insert into literally_timetable (time) values ('9:30-11:05');
+insert into literally_timetable (time) values ('11:20-12:55');
+insert into literally_timetable (time) values ('13:10-14:45');
+insert into literally_timetable (time) values ('15:25-17:00');
+insert into literally_timetable (time) values ('17:15-18:50');
+select * from literally_timetable;
+
+for commit
